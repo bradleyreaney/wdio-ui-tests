@@ -22,11 +22,11 @@ To run the automation suite, run the `npm run wdio` command in the terminal. Thi
 >**Note** - The boilerplate has the tests running in chromes headless mode. See the **Features added to this project** section for info on how to disable this if needed. 
 
 ## Features added to this project
-#####ChromeDriver
+##### ChromeDriver
 ChromeDriver is a standalone server that implements the W3C WebDriver standard. ChromeDriver is available for Chrome on Android and Chrome on Desktop (Mac, Linux, Windows and ChromeOS).
 More info about Chromedriver and WDIO can be found here - [WDIO Chromedriver Service](https://webdriver.io/docs/wdio-chromedriver-service/)
 
-#####Headless Chrome
+##### Headless Chrome
 A headless browser is a great tool for automated testing and server environments where you don't need a visible UI shell.
 If you need to remove the headless feature and see what’s happening in the UI, open the `wdio.conf.js` file and comment out the chrome options like below.
 ```JavaScript
@@ -41,7 +41,7 @@ capabilities: [{
 ```
 For more information on Google Chrome options, see the `goog:chromeOptions` section under capabilities here - [WDIO capabilities](https://webdriver.io/docs/options#capabilities)
 
-#####Allure reporter
+##### Allure reporter
 Allure reporter can be used to provide a neat web report form to show how the tests performed. After each run of the tests, a collection of JSON files will be added to the specified directory. 
 By default, this is `./allure-results` but can be changed in the `reporters` options in the `wdio.conf.js` file.
 
@@ -50,11 +50,11 @@ For more info see the [Allure Reporter](https://webdriver.io/docs/allure-reporte
 
 >**Note** - Allure will generate a lot of small JSON files that it uses to fill out the report. For this reason, both the `./allure-results` and `./allure-report` directories have been added to the `.gitignore` file.
 
-#####Casual
+##### Casual
 This is just an npm package that can be used to generate fake data. 
 A list of the different types of data it can generate can be found in their [GitHub Readme](https://github.com/boo1ean/casual#readme)
 
-#####specOptions
+##### specOptions
 This is just a method of being able to pass different bits of data into the tests. Each function that can accept as specOption has also been given a default value in case one isn't passed in.
 For example.
 At the top of the `./test/specs/storeExample.spec.js` file, you will see the following section to add specOptions
