@@ -7,19 +7,26 @@ For more information on this, please see the Webdriver.IO documentation - [What 
 
 ## How to set up the project
 First, you'll need to install a few things.
-1. Node.js
-
-2. Any IDE
+1. Node.js - https://nodejs.org/en/download/
+2. Any IDE - https://code.visualstudio.com/download
+3. Docker - https://docs.docker.com/get-docker/
 >**Note** - At the time of writing this the official docs suggested Node.js v12.16.1 or higher. Please see the [WDIO System Requirements](https://webdriver.io/docs/gettingstarted#system-requirements) page for more info.
-For the IDE I’d recommend VS Code but take your pick - [Download for VS Code](https://code.visualstudio.com/download)
 
 Once you have the above installed, pull the project from GitHub. Open the project in your preferred IDE and either using the built-in terminal or the systems, navigate to the root directory of the project.
 
 Once you've done that, simply run the `npm install` command and you’re all set up!
 
 ## How to run the project
-To run the automation suite, run the `npm run wdio` command in the terminal. This will look up the scripts in the `package.json` file which runs the `wdio run wdio.conf.js` command. This will look up the spec files to run from the `specs` section in the `wdio.conf.js` file. At present it's set to look for any JavaScript file in the specs folder`./test/specs/**/*.js`
->**Note** - The boilerplate has the tests running in chromes headless mode. See the **Features added to this project** section for info on how to disable this if needed. 
+##### Standard
+To run the automation suite, run the `npx wdio` command in the terminal. This will look up the scripts in the `package.json` file which runs the `wdio run wdio.conf.js` command. This will look up the spec files to run from the `specs` section in the `wdio.conf.js` file. At present it's set to look for any JavaScript file in the specs folder`./test/specs/**/*.js`
+
+##### Docker container
+>**Note** - You will need headless mode enabled when running the tests using docker. See the "Features added to this project" section for more info.
+Also, make sure you have docker open.
+
+If this is the first time running the tests in docker or you've made some changes, you'll need to build it. To do this run the `docker build -t wdio -f Dockerfile .` command in the terminal.
+Once this has completed you can then use the `docker run -it wdio` to run the tests.
+At this point it just follows the standard flow and gets the specs from the `wdio.conf.js` file.
 
 ## Features added to this project
 ##### ChromeDriver
@@ -31,15 +38,27 @@ A headless browser is a great tool for automated testing and server environments
 If you need to remove the headless feature and see what’s happening in the UI, open the `wdio.conf.js` file and comment out the chrome options like below.
 ```JavaScript
 capabilities: [{
-        maxInstances: 5,
+        maxInstances: 1,
         browserName: 'chrome',
-        'goog:chromeOptions': { 
-            //args: ["--headless","--disable-gpu"]
-            },
-        acceptInsecureCerts: true
-    }]
+        acceptInsecureCerts: true,
+        'goog:chromeOptions': {
+            args: [
+                //'--no-sandbox',
+                //'--disable-infobars',
+                //'--headless',
+                //'--disable-gpu',
+                //'--window-size=1440,735'
+            ],
+        }
+    }],
 ```
+
+
 For more information on Google Chrome options, see the `goog:chromeOptions` section under capabilities here - [WDIO capabilities](https://webdriver.io/docs/options#capabilities)
+
+##### Docker
+Docker is a powerful containerization technology that allows to encapsulate your test suite into a container that behaves the same on every system. This can avoid flakiness due to different browser or platform versions.
+For more info see the [Docker](https://webdriver.io/docs/docker/) page in WDIOs docs
 
 ##### Allure reporter
 Allure reporter can be used to provide a neat web report form to show how the tests performed. After each run of the tests, a collection of JSON files will be added to the specified directory. 

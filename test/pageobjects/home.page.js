@@ -1,3 +1,5 @@
+const Helper = require('../helper/helper');
+
 class HomePage {
 
     get productStoreLogo() {
@@ -19,18 +21,20 @@ class HomePage {
     }
 
     async selectCategory(specOptions) {
-        await this.categoriesSection.waitForExist({
-            timeout: 2000,
-            timeoutMsg: 'Categories section did not exist after 2s'
-        });
+        await Helper.waitForElementToExist(
+            this.categoriesSection,
+            2000,
+            'Categories section did not exist after 2s'
+        );
         await this.categoriesSection.$(`*=${specOptions.category || 'Laptops'}`).click();
     }
 
     async selectProduct(specOptions) {
-        await this.product(specOptions.product || 'MacBook air').waitForExist({
-            timeout: 2000,
-            timeoutMsg: `The product '${specOptions.product || 'MacBook air'}' did not exist after 2s`
-        });
+        await Helper.waitForElementToExist(
+            this.product(specOptions.product || 'MacBook air'),
+            2000,
+            `The product '${specOptions.product || 'MacBook air'}' did not exist after 2s`
+        );
         await this.product(specOptions.product || 'MacBook air').click();
     }
 }

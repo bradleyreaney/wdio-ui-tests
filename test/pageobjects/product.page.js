@@ -1,3 +1,5 @@
+const Helper = require('../helper/helper');
+
 class ProductPage {
 
     get addToCart() {
@@ -19,10 +21,11 @@ class ProductPage {
     }
 
     async clickAddToCart() {
-        await this.addToCart.waitForExist({
-            timeout: 2000,
-            timeoutMsg: 'Add to cart button did not exist after 2s'
-        })
+        await Helper.waitForElementToExist(
+            this.addToCart,
+            2000,
+            'Add to cart button did not exist after 2s'
+        );
         await this.addToCart.click();
     }
 }

@@ -1,6 +1,6 @@
-const HomePage = require('../pageobjects/home.page');
-const OrderPage = require('../pageobjects/order.page');
-const ProductPage = require('../pageobjects/product.page');
+const HomePage = require('../pageObjects/home.page');
+const OrderPage = require('../pageObjects/order.page');
+const ProductPage = require('../pageObjects/product.page');
 const Helper = require('../helper/helper');
 
 const specOptions = {

@@ -8,6 +8,13 @@ class Helper {
             })
         )
     }
+
+    async waitForElementToExist(element, timeout, errorMessage) {
+        await element.waitForExist({
+            timeout: timeout,
+            timeoutMsg: errorMessage
+        });
+    }
 }
 
 module.exports = new Helper();
